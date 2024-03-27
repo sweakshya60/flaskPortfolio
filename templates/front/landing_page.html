@@ -1,0 +1,65 @@
+{% extends 'front/layouts/layout.html' %}
+
+{% block main_content %}
+
+<div id="home" class="hero">
+
+    <div class="imgbody">
+        <div class="imgslider"></div>
+    </div>
+</div>
+<div class="content">
+    <h4>Hello, my name is</h4>
+    <h1>{{info_dict['name']}}</h1>
+    <h3>I am a {{info_dict['post']}}.</h3>
+    <div class="newslatter">
+        <form action="">
+            <input type="email" name="email" id="mail" placeholder="Enter your Email">
+            <input type="submit" name="submit" value="Let's Start">
+        </form>
+    </div>
+</div>
+</div>
+
+<!-- skill section starts -->
+<div id="services" class="service">
+    <div class="title">
+        <h2>My Skills</h2>
+    </div>
+
+    <div class="box">
+        {% for skill in skills %}
+        <div class="card">
+            <img src="../static/images/css.png" alt="">
+            <h5>{{ skill.title }}</h5>
+            <div class="pra">
+                <p>{{ skill.truncated_desc }}</p>
+
+                <p style="text-align: center;">
+                    <a class="button">Read More</a>
+                </p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+<div class="experience">
+    <div class="titlee">
+        <h1>My Experience</h1>
+        <p>Exploring Paths: A Journey Through Experience</p>
+
+        <div class="timeline">
+
+            {% for ex in allEx %}
+            <div class="checkpoint">
+                <div>
+                    <h2>{{ex.title}}</h2>
+                    <p>{{ex.truncated_desc}}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}
