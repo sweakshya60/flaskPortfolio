@@ -31,13 +31,17 @@ nav{
 span{
     color:red;
 }
-nav ul{
+nav a{
+    text-decoration: none;
+}
+nav ul {
     list-style-type: none;
     display: flex;
     padding: 10px 25px;
 }
 nav ul a {
     color:white;
+    padding: 10px 25px;
     text-decoration: none;
     font-weight: bold;
     text-transform: capitalize;
@@ -46,9 +50,10 @@ nav ul a {
 }
 nav ul a:hover{
     color:red;
-    /* background-color: #524d4d; */
-    /* transition: .4s; */
-    /* transform: scale(5); */
+}
+
+nav ul li.active a {
+    color: red; 
 }
 .btn{
     color: white;
@@ -201,18 +206,20 @@ button:hover{
 }
 
 .box{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columns with equal width */
+    grid-template-rows: auto auto;
+    gap: 30px; 
     justify-content: center;
     align-items: center;
-    min-height: 450px;
+    /* min-height: 450px; */
+    padding:45px ;
 }
 .card{
-    height: 365px;
-    width: 335px;
     padding: 20px 35px;
     background: #191919;
     border-radius: 20px;
-    margin: 15px;
+    /* height: 400px; */
     position: relative;
     overflow: hidden;
     text-align: center;
@@ -517,4 +524,9 @@ textarea,input {
 .butt{
     margin: 5px 250px;
 }
+
+#successMessage{
+    color: rgb(35, 136, 35);
+}
+
 

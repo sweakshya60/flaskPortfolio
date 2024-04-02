@@ -1,0 +1,117 @@
+{% extends 'front/layouts/resumeLayout.html' %}
+
+{% block main_content %}
+<div class="container resume">
+    <div class="profile">
+        <div class="profile_container">
+            <div class="profile_profileImg">
+                <img src="girl.jpg" alt="sweakshya">
+            </div>
+            <div>
+                <h1 class="profile_name">
+                    <span class="profile_name_firstName">Sweakshya</span>
+                    <span class="profile_name_lastName">Shrestha</span>
+                </h1>
+                <p class="profile_title">{{info_dict['post']}}</p>
+                <p class="description profile_description">
+                    {{info_dict['desc']}}
+                </p>
+                <a class="downloadBtn" href="./cv.pdf" download="Resume.pdf">Download Resume</a>
+            </div>
+        </div>
+    </div>
+    <div class="group-1">
+        <div class="skills">
+            <h3 class="title-common">Expertise</h3>
+            {% for skill in skills %}
+            <ul class="skills_list description">
+                > {{ skill.title }}
+            </ul>
+            {% endfor %}
+        </div>
+        <div class="ref">
+            <h3 class="title-common">Reference</h3>
+            <div class="ref_item">
+                <h4 class="ref_name">Sanam Shrestha</h4>
+                <p class="description">Highly recommended for her exceptional professionalism and dedication.</p>
+            </div>
+            <div class="ref_item">
+                <h4 class="ref_name">Amir Shrestha</h4>
+                <p class="description">
+                    Strongly endorsed for his outstanding technical skills and teamwork.</p>
+            </div>
+        </div>
+
+        <div class="edu">
+            <h3 class="title-common">Education</h3>
+            <div class="edu_item">
+                <p class="item_preTitle">2020-2022</p>
+                <h4 class="item_title">Computer Science</h4>
+                <p class="item_subtitle">
+                    Miniland English High School
+                </p>
+            </div>
+            <div class="edu_item">
+                <p class="item_preTitle">2022-2026</p>
+                <h4 class="item_title">Bachleor's in IT</h4>
+                <p class="item_subtitle">
+                    Linclon University
+                </p>
+            </div>
+        </div>
+
+        <div class="certification">
+            <h3 class="title-common">certification</h3>
+            <div class="certification_item">
+                <p class="item_preTitle">2021</p>
+                <h4 class="item_title">HTML&CSS</h4>
+                <p class="description">
+                    Proficient in web content creation and styling using HTML and CSS. Demonstrated expertise in front-end development principles through certification.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="group-2">
+        <div class="exp">
+            <h3 class="title-common">Experience</h3>
+            
+        {% for ex in allEx[:2] %}
+            <div class="exp_item">
+                <h4 class="item_title">{{ex.title}}</h4>
+                <p class=" description">
+                   {{ex.desc}}
+                </p>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="awards">
+            <h3 class="title-common">Awards</h3>
+            <div class="awards_item">
+                <p class="item_preTitle">2022</p>
+                <h4 class="item_title">Rashid Software LTD.</h4>
+                <p class=" description"> Acknowledged for outstanding contributions at Rashid Software Ltd.
+                </p>
+            </div>
+            <div class="awards_item">
+                <p class="item_preTitle">2024</p>
+                <h4 class="item_title">TriVigna</h4>
+                <p class="description">
+                    Recognized for excellence in frontend by Trivigna Ltd.
+                </p>
+            </div>
+        </div>
+
+        <div class="interest">
+            <h3 class="title-common">Interest</h3>
+            <div class="interest_items">
+                <div class="interest_item">
+                    <span class="interest">{{info_dict['interest']}}</span>
+                </div>
+            
+            </div>
+
+        </div>
+    </div>
+
+</div>
+{% endblock %}

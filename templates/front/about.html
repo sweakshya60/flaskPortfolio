@@ -12,12 +12,7 @@
             <h2>I Can Design Anything You Want</h2>
             <h5>Developer <span>& Designer</span></h5>
             <p>
-                As a seasoned web developer, I thrive on the creative process of transforming ideas into functional and
-                visually appealing digital experiences. With a keen eye for design and a passion for coding, I excel in
-                crafting responsive websites that seamlessly blend aesthetics with usability. Armed with expertise in
-                various programming languages and frameworks, I embrace challenges head-on, whether it's optimizing
-                performance, troubleshooting bugs, or implementing innovative features. In every project, my goal is to
-                harness the power of technology to enhance user engagement and drive success in the digital realm.cape.
+                {{info_dict['about']}}
             </p>
             <button type="button"> Let's Talk</button>
         </div>
@@ -31,15 +26,13 @@
     </div>
 
     <div class="box">
-
-
+        {% for service in services%}
         <div class="card">
-            <img src="../static/images/web.png" alt="">
-            <h5>Web Design</h5>
+            <img src="{{ service.images}}" alt="{{ service.title }}">
+            <h5>{{service.title}}</h5>
             <div class="pra">
                 <p>
-                    Our web design services focus on creating visually captivating and user-friendly websites that
-                    reflect your brand's identity and engage your target audience.
+                    {{ service.truncated_desc }}
                 </p>
 
                 <p style="text-align: center;">
@@ -47,89 +40,9 @@
                 </p>
             </div>
         </div>
-        <div class="card">
-            <img src="../static/images/uiux.png" alt="">
-            <h5>UI/UX</h5>
-            <div class="pra">
-                <p>
-
-                    In UI/UX design, we prioritize intuitive interfaces and seamless user experiences. Through
-                    meticulous planning and user testing, we craft designs that not only look great.
-                <p style="text-align: center;">
-                    <a class="button" href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <img src="../static/images/seo.png" alt="">
-            <h5>SEO</h5>
-            <div class="pra">
-                <p>
-                    Our SEO services aims to online visibility and driving organic traffic through strategic
-                    optimization techniques, ultimately increasing leads and conversions.
-                </p>
-
-                <p style="text-align: center;">
-                    <a class="button" href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-
-
-
+        {% endfor %}
     </div>
 
-    <div class="box">
 
-
-        <div class="card">
-            <img src="../static/images/web.png" alt="">
-            <h5>Web Design</h5>
-            <div class="pra">
-                <p>
-                    Our web design services focus on creating visually captivating and user-friendly websites that
-                    reflect your brand's identity and engage your target audience.
-                </p>
-
-                <p style="text-align: center;">
-                    <a class="button" href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-        <div class="card">
-            <img src="../static/images/uiux.png" alt="">
-            <h5>UI/UX</h5>
-            <div class="pra">
-                <p>
-
-                    In UI/UX design, we prioritize intuitive interfaces and seamless user experiences. Through
-                    meticulous planning and user testing, we craft designs that not only look great.
-                <p style="text-align: center;">
-                    <a class="button" href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <img src="../static/images/seo.png" alt="">
-            <h5>SEO</h5>
-            <div class="pra">
-                <p>
-                    Our SEO services aims to online visibility and driving organic traffic through strategic
-                    optimization techniques, ultimately increasing leads and conversions.
-                </p>
-
-                <p style="text-align: center;">
-                    <a class="button" href="#">Read More</a>
-                </p>
-            </div>
-        </div>
-
-
-
-    </div>
 </div>
 {% endblock %}

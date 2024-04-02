@@ -1,0 +1,25 @@
+{% extends 'front/layouts/layout.html' %}
+
+{% block main_content %}
+<div class="contact-container">
+    <div class="top">
+        <div class="title-contact">
+            <h1>Get In Touch</h1>
+            <div class="topp">Phone:{{info_dict['phone']}}</div>
+            <div class="topp">Email:{{info_dict['email']}}</div>
+            <div class="topp">Location:{{info_dict['location']}}</div>
+
+
+            <form id="myForm" class="Box">
+                <input class="b1" type="text" name="name" id="name" placeholder="Username">
+                <input class="b1" type="email" name="email" id="email" placeholder="Enter your email address">
+                <textarea class="b1" name="message" placeholder="Message" id="message" cols="10" rows="3"></textarea>
+                <button type="submit" class="butt">Submit</button>
+            </form>
+            <div id="successMessage" class="success-message" style="display: none;">Form submitted successfully!</div>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

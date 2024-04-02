@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, send_file
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
+import os
 
 app = Flask(__name__)
 
@@ -49,8 +51,6 @@ def landing_page():
     return render_template(
         "front/landing_page.html", allEx=allEx, info_dict=info_dict, skills=skills
     )
-    # return "<p>Hello, World!</p>"
-
 
 @app.route("/admin/experience/create")
 def create_experince():
@@ -202,7 +202,18 @@ def list_infos():
 # about  page
 @app.route("/about")
 def about():
-    return render_template("front/about.html")
+    services = Service.query.all()
+    infos = Info.query.all()
+    # Initialize an empty dictionary to store key-value pairs
+    info_dict = {}
+    # Iterate through each Info object and populate the dictionary
+    for info in infos:
+        info_dict[info.key] = info.value
+    # Truncate descriptions for each skill
+    for service in services:
+        service.truncated_desc = truncate_string(service.desc, 150)
+
+    return render_template("front/about.html", services = services, info_dict=info_dict)
 
 
 # services
@@ -211,6 +222,7 @@ def about():
 class Service(db.Model):
     ser_id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(200), nullable=False)
+    images = db.Column(db.String(200), nullable=False)
     desc = db.Column(db.String(500), nullable=False)
 
     def __repr__(self) -> str:
@@ -226,7 +238,16 @@ def create_service():
 def add_service():
     title = request.form["title"]
     description = request.form["description"]
-    new_service = Service(title=title, desc=description)
+     # Handle image upload
+    image_path = None
+    if 'image' in request.files:
+        image_file = request.files['image']
+        if image_file:
+            filename = image_file.filename
+            image_path = 'static/images/services/' + filename
+            image_file.save(os.path.join(app.root_path, image_path))
+            
+    new_service = Service(title=title, desc=description, images=image_path)
     db.session.add(new_service)
     db.session.commit()
     return redirect("/admin/service")
@@ -239,6 +260,15 @@ def edit_service(id):
     if request.method == "POST":
         service.title = request.form["title"]
         service.desc = request.form["description"]
+         # Handle image upload
+        if 'image' in request.files:
+            image_file = request.files['image']
+            if image_file:
+                filename = image_file.filename
+                image_path = 'static/images/services/' + filename
+                image_file.save(os.path.join(app.root_path, image_path))
+                service.images = image_path
+        
         db.session.commit()
         return redirect(url_for("list_services"))
     return render_template("admin/service/edit.html", service=service)
@@ -258,6 +288,46 @@ def list_services():
     services = Service.query.all()
     return render_template("admin/service/list.html", services=services)
 
+# contact
+@app.route("/contact")
+def contact():
+
+    infos = Info.query.all()
+
+
+    # Initialize an empty dictionary to store key-value pairs
+    info_dict = {}
+
+    # Iterate through each Info object and populate the dictionary
+
+    for info in infos:
+        info_dict[info.key] = info.value
+
+    return render_template("front/contact.html",  info_dict=info_dict)
+
+@app.route("/resume")
+def resume():
+
+    allEx = Experience.query.all()
+    infos = Info.query.all()
+    skills = Skill.query.all()
+
+
+    # Initialize an empty dictionary to store key-value pairs
+    info_dict = {}
+
+    # Iterate through each Info object and populate the dictionary
+
+    for info in infos:
+        info_dict[info.key] = info.value
+
+    return render_template("front/resume.html",  info_dict=info_dict, allEx = allEx, skills = skills)
+
+
+@app.route('/download_resume_pdf')
+def download_resume_pdf():    
+    # Send the PDF file as a downloadable attachment
+    return send_file('static/resume.pdf', as_attachment=True)
 
 if __name__ == "__main__":
     app.run(debug=True, port=8000)
